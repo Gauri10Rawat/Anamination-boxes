@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Boxes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      justify-content: space-around;
+      background: linear-gradient(to right, #e3f2fd, #ffcbdc);
+    }
+
+    .box {
+      width: 300px;
+      height: 100px;
+      background-color: #ddd;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      cursor: pointer;
+      padding: 10px;
+      position: relative;
+    }
+
+    .box.expanded {
+      height: 250px;
+    }
+
+    .controls {
+      opacity: 0;
+      max-height: 0;
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .box.expanded .controls {
+      opacity: 1;
+      max-height: 200px;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" onclick="toggleBox(this)">
+    <h3>Top Box</h3>
+    <div class="controls">
+      <select onchange="changeColor(this)">
+        <option value="">Select Color</option>
+        <option value="lightcoral">Light Coral</option>
+        <option value="lightblue">Light Blue</option>
+        <option value="lightgreen">Light Green</option>
+      </select>
+      <select onchange="changeSize(this)">
+        <option value="">Select Size</option>
+        <option value="100px">Small</option>
+        <option value="200px">Medium</option>
+        <option value="300px">Large</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="box" onclick="toggleBox(this)">
+    <h3>Middle Box</h3>
+    <div class="controls">
+      <select onchange="changeColor(this)">
+        <option value="">Select Color</option>
+        <option value="lightcoral">Light Coral</option>
+        <option value="lightblue">Light Blue</option>
+        <option value="lightgreen">Light Green</option>
+      </select>
+      <select onchange="changeSize(this)">
+        <option value="">Select Size</option>
+        <option value="100px">Small</option>
+        <option value="200px">Medium</option>
+        <option value="300px">Large</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="box" onclick="toggleBox(this)">
+    <h3>Bottom Box</h3>
+    <div class="controls">
+      <select onchange="changeColor(this)">
+        <option value="">Select Color</option>
+        <option value="lightcoral">Light Coral</option>
+        <option value="lightblue">Light Blue</option>
+        <option value="lightgreen">Light Green</option>
+      </select>
+      <select onchange="changeSize(this)">
+        <option value="">Select Size</option>
+        <option value="100px">Small</option>
+        <option value="200px">Medium</option>
+        <option value="300px">Large</option>
+      </select>
+    </div>
+  </div>
+
+  <script>
+    function toggleBox(element) {
+      const isExpanded = element.classList.contains("expanded");
+      document.querySelectorAll(".box").forEach(box => box.classList.remove("expanded"));
+      if (!isExpanded) element.classList.add("expanded");
+    }
+
+    function changeColor(select) {
+      const box = select.closest(".box");
+      const color = select.value;
+      if (color) box.style.backgroundColor = color;
+    }
+
+    function changeSize(select) {
+      const box = select.closest(".box");
+      const size = select.value;
+      if (size) box.style.height = size;
+    }
+  </script>
+</body>
+</html>
